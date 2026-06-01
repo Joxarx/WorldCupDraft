@@ -28,42 +28,18 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Archivo Black"', 'system-ui', 'sans-serif'],
-        body: ['"Archivo"', 'Inter', 'sans-serif'],
+        // Round, heavy display face — closest free match to the FWC26 type.
+        display: ['"Baloo 2"', 'system-ui', 'sans-serif'],
+        body: ['"Archivo"', 'system-ui', 'sans-serif'],
       },
       keyframes: {
-        'slide-up': {
-          '0%': { transform: 'translateY(30px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
-        'pulse-glow': {
-          '0%, 100%': { boxShadow: '0 0 25px rgba(255,255,255,0.25)' },
-          '50%': { boxShadow: '0 0 55px rgba(255,255,255,0.55)' },
-        },
-        'spin-slow': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-        'spin-reverse': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(-360deg)' },
-        },
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },
           '100%': { backgroundPosition: '200% 0' },
         },
-        'hue-rotate': {
-          '0%': { filter: 'hue-rotate(0deg)' },
-          '100%': { filter: 'hue-rotate(360deg)' },
-        },
       },
       animation: {
-        'slide-up': 'slide-up 0.6s ease-out',
-        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
-        'spin-slow': 'spin-slow 40s linear infinite',
-        'spin-reverse': 'spin-reverse 60s linear infinite',
-        shimmer: 'shimmer 3s linear infinite',
-        'hue-rotate': 'hue-rotate 12s linear infinite',
+        shimmer: 'shimmer 7s linear infinite',
       },
     },
   },

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700;800;900&family=Baloo+2:wght@500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +16,7 @@ body,
   width: 100%;
   min-height: 100vh;
   background: #0A0A0B;
-  font-family: 'Archivo', 'Inter', system-ui, sans-serif;
+  font-family: 'Archivo', system-ui, sans-serif;
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,89 +27,75 @@ body,
 }
 
 @layer utilities {
+  /* Round, heavy display face — the closest free match to the FWC26 type. */
   .font-display {
-    font-family: 'Archivo Black', system-ui, sans-serif;
-    letter-spacing: -0.02em;
+    font-family: 'Baloo 2', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
   }
 
-  /* Near-black canvas, the FWC26 backdrop. */
+  /* Near-black canvas. Flat — no radial glows. */
   .bg-wc26 {
     background-color: #0A0A0B;
-    background-image:
-      radial-gradient(circle at 15% 0%, rgba(168, 85, 247, 0.12), transparent 45%),
-      radial-gradient(circle at 85% 100%, rgba(6, 182, 212, 0.12), transparent 45%);
   }
 
-  /* The signature concentric rainbow arcs. Eight fixed bands by percentage
-     (not repeating pixels) so there's no moire/banding regardless of size.
-     Apply to a large absolutely positioned circular div; the parent clips it. */
-  .wc26-arcs {
-    background: radial-gradient(
-      circle at center,
-      #E4002B 0 11%,
-      #FF6B00 11% 23%,
-      #FFC400 23% 35%,
-      #22C55E 35% 47%,
-      #06B6D4 47% 59%,
-      #6366F1 59% 71%,
-      #A855F7 71% 84%,
-      #EC4899 84% 100%
-    );
-    border-radius: 9999px;
-  }
-
-  /* A flatter arc band set for hero strips. */
-  .wc26-bands {
-    background: repeating-linear-gradient(
-      100deg,
-      #E4002B 0 60px,
-      #FF6B00 60px 120px,
-      #FFC400 120px 180px,
-      #22C55E 180px 240px,
-      #06B6D4 240px 300px,
-      #6366F1 300px 360px,
-      #A855F7 360px 420px,
-      #EC4899 420px 480px
-    );
-  }
-
-  .text-shadow-pop {
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  }
-  .text-shadow-glow {
-    text-shadow: 0 0 28px currentColor, 0 0 56px currentColor;
-  }
-
-  /* Rainbow text fill that slowly sweeps - echoes the brand gradient. */
-  .shimmer-rainbow {
+  /* Rainbow text fill that slowly sweeps (solid bands moving). */
+  .rainbow-text {
     background: linear-gradient(
       90deg,
-      #E4002B, #FF6B00, #FFC400, #22C55E, #06B6D4, #6366F1, #A855F7, #EC4899, #E4002B
+      #E4002B, #FF6B00, #FFC400, #A3E635, #22C55E, #06B6D4, #6366F1, #A855F7, #EC4899, #E4002B
     );
-    background-size: 200% auto;
+    background-size: 220% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shimmer 6s linear infinite;
+    color: transparent;
+    animation: shimmer 7s linear infinite;
   }
 
-  .shimmer-gold {
-    background: linear-gradient(90deg, #FFC400 0%, #FFFFFF 50%, #FFC400 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 3s linear infinite;
+  @keyframes shimmer {
+    to { background-position: 220% center; }
   }
+
+  /* Real flag (flagcdn) + colored fallback tile. */
+  .flag-img {
+    border-radius: 4px;
+    object-fit: cover;
+    flex: none;
+    display: inline-block;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28), 0 1px 3px rgba(0, 0, 0, 0.45);
+  }
+  .flag-fallback {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  }
+  .flag-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 5px 11px 5px 6px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+}
+
+/* Slot reel for the draw chamber */
+@keyframes reelFlick {
+  50% { opacity: 0.55; transform: translateY(-4px); filter: blur(1px); }
+}
+.reel-flick {
+  animation: reelFlick 0.075s steps(1) infinite;
 }
 
 /* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #0A0A0B;
-}
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0A0A0B; }
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #EC4899, #6366F1, #06B6D4);
   border-radius: 10px;
